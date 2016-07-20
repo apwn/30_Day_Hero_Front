@@ -1,0 +1,52 @@
+body {
+  font-family: 'PT Sans Narrow', sans-serif;
+}
+
+#header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background-color: #000;
+  height: 70px;
+  color: #fff;
+}
+
+.main-logo a{
+  color: #fff;
+  padding-left: 20px;
+  text-decoration: none;
+  font-size: 1.5em;
+}
+
+.main-nav {
+  /*display: flex;*/
+}
+.main-nav ul {
+  list-style: none;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  margin-bottom: 0;
+}
+.main-nav li {
+  display: list-item;
+  margin: 0 15px;
+}
+
+#offcanvas-right {
+  color: #000;
+}
+
+.user-nav {
+  right: 10px;
+  padding-right: 10px;
+}
+
+.user-nav a {
+  margin: 2px;
+}
+
+.container {
+  width: 80%;
+  margin: 10px auto;
+}
