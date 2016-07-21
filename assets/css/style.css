@@ -50,3 +50,13 @@ body {
   width: 80%;
   margin: 10px auto;
 }
+
+.signup-form {
+  width: 50%;
+  text-align: center;
+  margin: 0 auto;
+}
+
+.signup-form h2 {
+  margin: 20px;
+}

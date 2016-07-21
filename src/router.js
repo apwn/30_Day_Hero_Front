@@ -1,17 +1,27 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
+import VueResource from 'vue-resource'
 import Homepage from './views/Homepage.vue'
 
 Vue.use(VueRouter);
+Vue.use(VueResource);
+
+import auth from './auth/index.js'
+import Signup from './views/Signup.vue'
+
+Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
+
+// Check the user's auth status when the app starts
+auth.checkAuth()
 
 // Define some components
-var Signup = Vue.extend({
-    template: '<p>This is signup!</p>'
-});
-
-var Bar = Vue.extend({
-    template: '<p>This is bar!</p>'
-});
+// var Signup = Vue.extend({
+//     template: '<p>This is signup!</p>'
+// });
+//
+// var Bar = Vue.extend({
+//     template: '<p>This is bar!</p>'
+// });
 
 // The router needs a root component to render.
 // For demo purposes, we will just use an empty one
@@ -34,9 +44,6 @@ router.map({
     },
     '/signup': {
         component: Signup
-    },
-    '/bar': {
-        component: Bar
     }
 });
 
