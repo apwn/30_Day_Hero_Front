@@ -1,9 +1,13 @@
 <template>
-
-    <h1>{{ msg }}</h1>
-    <p>There are {{ users }} users signed up!</p>
-    <p> {{ userAuth.authenticated }} </p>
-    <p v-if="userAuth.authenticated">Authenticated!</p>
+    <div v-if="!user.authenticated">
+    <h1>Hello World!</h1>
+    <p>There are {{ users }} users signed up!</p><br>
+    </div>
+    <div v-if="user.authenticated">
+    <h1 v-if="user.userInfo.firstName">Hello {{ user.userInfo.firstName }}</h1>
+    <h1 v-else>Hi There!</h1>
+    <router-view></router-view>
+    </div>
 
 </template>
 
@@ -12,9 +16,9 @@
  import auth from '../auth'
 export default {
   ready: function() {
+    console.log(auth.user)
   this.$http({url: 'http://localhost:3000/api/info', method: 'GET'}).then(function (response) {
   this.users = response.data.userCount
-
   })
 },
   data () {
@@ -23,10 +27,9 @@ export default {
       // with hot-reload because the reloaded component
       // preserves its current state and we are modifying
       // its initial state.
-      msg: 'Hello Tom!',
       userCount : '',
       users: '',
-      userAuth: auth.user
+      user: auth.user
     }
   }
 }

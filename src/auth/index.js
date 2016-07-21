@@ -1,4 +1,4 @@
-import {router} from '../router'
+import {router} from '../main'
 
 // URL and endpoint constants
 const API_URL = 'http://localhost:3000/'
@@ -8,8 +8,14 @@ const SIGNUP_URL = API_URL + 'api/users/'
 export default {
 
   // User object will let us check authentication status
+  // var userInfo = JSON.parse(localStorage.getItem('user')),
+
   user: {
-    authenticated: false
+    authenticated: false,
+    userInfo: JSON.parse(localStorage.getItem('user'))
+    // if (userInfo){
+    //   userInfo: userInfo
+    // }
   },
 
   // Send a request to the login URL and save the returned JWT
@@ -17,8 +23,10 @@ login(context, creds, redirect) {
     context.$http.post(LOGIN_URL, creds).then((data) => {
       // console.log(data)
       localStorage.setItem('token', data.data.token)
+      localStorage.setItem('user', JSON.stringify(data.data.user));
 
       this.user.authenticated = true
+      this.user.userInfo = JSON.parse(localStorage.getItem('user'))
 
       if(redirect) {
         context.$router.go(redirect)
@@ -34,8 +42,10 @@ login(context, creds, redirect) {
     context.$http.post(SIGNUP_URL, creds).then((data) => {
       // console.log(data)
       localStorage.setItem('token', data.data.token)
+      localStorage.setItem('user', JSON.stringify(data.data.user));
 
       this.user.authenticated = true
+      this.user.userInfo = JSON.parse(localStorage.getItem('user'))
 
       if(redirect) {
         context.$router.go(redirect)
@@ -64,7 +74,8 @@ login(context, creds, redirect) {
 
   // To log out, we just need to remove the token
   logout() {
-    localStorage.removeItem('token')
+    // localStorage.removeItem('token')
+    localStorage.clear()
     this.user.authenticated = false
   },
 
