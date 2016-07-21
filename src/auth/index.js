@@ -13,19 +13,19 @@ export default {
   },
 
   // Send a request to the login URL and save the returned JWT
-  login(context, creds, redirect) {
-    context.$http.post(LOGIN_URL, creds, (data) => {
-      localStorage.setItem('token', data.token)
+login(context, creds, redirect) {
+    context.$http.post(LOGIN_URL, creds).then((data) => {
+      // console.log(data)
+      localStorage.setItem('token', data.data.token)
 
       this.user.authenticated = true
 
-      // Redirect to a specified route
       if(redirect) {
-        router.go(redirect)
+        context.$router.go(redirect)
       }
 
-    }).error((err) => {
-      context.error = err
+    }, (data) => {
+      context.error = data
     })
   },
 
@@ -37,12 +37,12 @@ export default {
 
       this.user.authenticated = true
 
-      // if(redirect) {
-      //   router.go(redirect)
-      // }
+      if(redirect) {
+        context.$router.go(redirect)
+      }
 
     }, (data) => {
-      context.error = err
+      context.error = data
     })
   },
 

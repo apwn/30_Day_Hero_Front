@@ -1,7 +1,7 @@
 <template>
 
   <div class="signup-form">
-    <h2>Signup</h2>
+    <h2>Login</h2>
 
     <form class="form">
 
@@ -17,7 +17,7 @@
 
     </form>
     <div class="form-item">
-        <button class="button primary" @click="submit()">Signup</button>
+        <button class="button primary" @click="submit()">Login</button>
     </div>
 
 
@@ -44,7 +44,7 @@ export default {
         email: this.email,
         password: this.password
       }
-      auth.signup(this, credentials, '/')
+      auth.login(this, credentials, '/')
     }
   }
 }

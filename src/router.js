@@ -8,8 +8,10 @@ Vue.use(VueResource);
 
 import auth from './auth/index.js'
 import Signup from './views/Signup.vue'
+import Login from './views/Login.vue'
 
-Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
+// Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('token');
+Vue.http.headers.common['Authorization'] = auth.getAuthHeader();
 
 // Check the user's auth status when the app starts
 auth.checkAuth()
@@ -40,10 +42,14 @@ var router = new VueRouter();
 // We'll talk about nested routes later.
 router.map({
     '/': {
+      name: 'index',
       component: Homepage
     },
     '/signup': {
         component: Signup
+    },
+    '/login': {
+      component: Login
     }
 });
 
