@@ -3,7 +3,7 @@
   <div class="signup-form">
     <h2>Signup</h2>
 
-    <form class="form">
+    <form class="form" v-on:submit.prevent>
 
     <div class="form-item">
         <label>Name</label>
@@ -25,11 +25,11 @@
         <input type="password" name="passwordConfirmation" v-model="passwordConfirmation">
     </div>
 
-    </form>
     <div class="form-item">
         <button class="button primary" @click="submit()">Signup</button>
     </div>
 
+    </form>
 
     </div>
 
