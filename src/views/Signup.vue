@@ -7,7 +7,7 @@
 
     <div class="form-item">
         <label>Name</label>
-        <input type="email" name="email" v-model="name">
+        <input type="text" name="name" v-model="name">
     </div>
 
     <div class="form-item">
@@ -18,6 +18,11 @@
     <div class="form-item">
         <label>Password</label>
         <input type="password" name="password" v-model="password">
+    </div>
+
+    <div class="form-item">
+        <label>Password Confirmation</label>
+        <input type="password" name="passwordConfirmation" v-model="passwordConfirmation">
     </div>
 
     </form>
@@ -41,17 +46,24 @@ export default {
     return {
       name: '',
       email: '',
-      password: ''
+      password: '',
+      passwordConfirmation: ''
     }
   },
   methods: {
     submit() {
-      var credentials = {
-        firstName: this.name,
-        email: this.email,
-        password: this.password
+      if (this.name == '' || this.email == '' || this.password == '' || this.passwordConfirmation == ''){
+        return alert ("Fields cannot be empty")
+      } else if (this.password !== this.passwordConfirmation){
+        return alert ("Password Confirmation doesn't match password")
+      } else {
+        var credentials = {
+          firstName: this.name,
+          email: this.email,
+          password: this.password
+        }
+        auth.signup(this, credentials, '/')
       }
-      auth.signup(this, credentials, '/')
     }
   }
 }
