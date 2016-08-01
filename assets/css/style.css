@@ -60,3 +60,15 @@ body {
 .signup-form h2 {
   margin: 20px;
 }
+
+.invalid-input {
+  border: 1px solid red !important;
+}
+
+input:focus:invalid {
+  border: 1px solid red;
+}
+
+input:focus:valid {
+  border: 1px solid green;
+}
